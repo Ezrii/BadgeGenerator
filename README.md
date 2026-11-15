@@ -41,6 +41,25 @@ cargo build --release        # binaire dans target/release/
 
 Sous Linux, l'interface et la boîte de dialogue de fichiers peuvent demander les bibliothèques GTK3 (`libgtk-3-dev`).
 
+## Installeur Windows (MSI)
+
+`installer/ratp-badge-generator.wxs` décrit l'installeur (dossier `Program Files`, raccourci dans le menu Démarrer, mise à jour sur place).
+
+Construction depuis Linux (Debian/Ubuntu) :
+
+```bash
+sudo apt install gcc-mingw-w64-x86-64 msitools wixl
+rustup target add x86_64-pc-windows-gnu
+CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER=x86_64-w64-mingw32-gcc \
+  cargo build --release --target x86_64-pc-windows-gnu
+x86_64-w64-mingw32-strip target/x86_64-pc-windows-gnu/release/ratp-badge-generator.exe
+wixl -a x64 -D ExePath=target/x86_64-pc-windows-gnu/release/ratp-badge-generator.exe \
+  installer/ratp-badge-generator.wxs -o RATPBadgeGenerator-0.1.0-x64.msi
+```
+
+Sous Windows, `cargo build --release` produit directement l'exécutable ; le MSI peut aussi être généré avec WiX.
+L'installeur n'est pas signé : Windows SmartScreen peut afficher un avertissement au premier lancement.
+
 ## Structure
 
 ```
@@ -49,6 +68,8 @@ src/
   lib.rs       point d'entrée de la bibliothèque
   excel.rs     lecture du classeur, extraction des personnes et services
   badges.rs    mise en page et génération du PDF (printpdf)
+installer/
+  ratp-badge-generator.wxs  définition de l'installeur MSI
 assets/
   ratp_logo.png          logo RATP Groupe (fixe)
   club_csp_logo.png      logo Club des CSP par défaut

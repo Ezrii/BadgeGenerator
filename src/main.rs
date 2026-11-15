@@ -1,3 +1,6 @@
+// Pas de console noire derrière la fenêtre sous Windows (build release).
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 use eframe::egui;
 use ratpbadge::{badges, excel};
 use std::path::PathBuf;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Installeur MSI (wixl / WiX). Variable attendue : ExePath = chemin de ratp-badge-generator.exe -->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Générateur de badges RATP" Language="1036" Version="0.1.0"
+           Manufacturer="RATPBadgeGenerator" UpgradeCode="081B8984-EF79-4A03-9775-B9DEABA2AFD6">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"
+             Description="Générateur de badges RATP"/>
+    <MajorUpgrade DowngradeErrorMessage="Une version plus récente est déjà installée."/>
+    <Media Id="1" Cabinet="app.cab" EmbedCab="yes"/>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLDIR" Name="RATPBadgeGenerator">
+          <Component Id="MainExe" Guid="45242B29-BF0F-4A2C-A594-084662E1E7A1" Win64="yes">
+            <File Id="MainExeFile" Name="ratp-badge-generator.exe" Source="$(var.ExePath)" KeyPath="yes"/>
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="AppMenuFolder" Name="Générateur de badges RATP">
+          <Component Id="MenuShortcut" Guid="4E172686-589E-4A2C-9D09-DD420B758E4D" Win64="yes">
+            <Shortcut Id="StartMenuShortcut" Name="Générateur de badges RATP"
+                      Target="[INSTALLDIR]ratp-badge-generator.exe" WorkingDirectory="INSTALLDIR"/>
+            <RemoveFolder Id="RemoveAppMenuFolder" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="Software\RATPBadgeGenerator" Name="installed"
+                           Type="integer" Value="1" KeyPath="yes"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="Main" Title="Générateur de badges RATP" Level="1">
+      <ComponentRef Id="MainExe"/>
+      <ComponentRef Id="MenuShortcut"/>
+    </Feature>
+  </Product>
+</Wix>
