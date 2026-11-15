@@ -54,7 +54,7 @@ CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER=x86_64-w64-mingw32-gcc \
   cargo build --release --target x86_64-pc-windows-gnu
 x86_64-w64-mingw32-strip target/x86_64-pc-windows-gnu/release/ratp-badge-generator.exe
 wixl -a x64 -D ExePath=target/x86_64-pc-windows-gnu/release/ratp-badge-generator.exe \
-  installer/ratp-badge-generator.wxs -o RATPBadgeGenerator-0.1.0-x64.msi
+  installer/ratp-badge-generator.wxs -o RATPBadgeGenerator-0.0.1-x64.msi
 ```
 
 Sous Windows, `cargo build --release` produit directement l'exécutable ; le MSI peut aussi être généré avec WiX.
@@ -80,5 +80,5 @@ Les dimensions, couleurs et tailles de police sont des constantes en tête de `s
 
 ## Notes
 
-- Les logos RATP sont des marques : garder ce dépôt privé.
+- Les logos RATP sont des marques : la licence Apache 2.0 du dépôt couvre le code, pas les logos (`assets/*.png`).
 - Les couleurs (bleu `#004FA3`, turquoise `#4BC0AD`) sont celles du logo RATP ; elles sont à valider sur la charte officielle.

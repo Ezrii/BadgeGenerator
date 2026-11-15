@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Installeur MSI (wixl / WiX). Variable attendue : ExePath = chemin de ratp-badge-generator.exe -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="Générateur de badges RATP" Language="1036" Version="0.1.0"
+  <Product Id="*" Name="Générateur de badges RATP" Language="1036" Version="0.0.1"
            Manufacturer="RATPBadgeGenerator" UpgradeCode="081B8984-EF79-4A03-9775-B9DEABA2AFD6">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"
              Description="Générateur de badges RATP"/>
