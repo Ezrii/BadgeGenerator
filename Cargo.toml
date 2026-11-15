@@ -1,0 +1,24 @@
+[package]
+name = "ratp-badge-generator"
+version = "0.1.0"
+edition = "2021"
+description = "Génère un PDF A4 de badges nominatifs (logo RATP fixe, logo personnalisable) à partir d'un fichier Excel"
+
+[lib]
+name = "ratpbadge"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ratp-badge-generator"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+calamine = "0.26"
+eframe = "0.29"
+image = { version = "0.24", default-features = false, features = ["png", "jpeg"] }
+printpdf = { version = "0.7", features = ["embedded_images"] }
+rfd = "0.15"
+ttf-parser = "0.24"
+# calamine 0.26 ne compile pas avec zip 2.6 (ZipFile sans paramètre générique)
+zip = "=2.2.0"
